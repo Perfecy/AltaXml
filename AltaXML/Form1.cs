@@ -85,121 +85,126 @@ namespace AltaXML
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(template_file_name);
                 // получим корневой элемент
-              
-             //   Debug.WriteLine("имя рута " + root.Name);
 
-
-                List<string> cell_values = new List<string>();
-
-                for (int j = 2; j <= 10; j++)
+                //   Debug.WriteLine("имя рута " + root.Name);
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    xDoc.Load(template_file_name);
-                    root = xDoc.DocumentElement;
-                    root.SetAttribute("time", DateTime.Now.ToString("yyyy-mm-dd"));
-                    for (int i = 1; i <= cl; i++)
-                    {
-                        cell_values.Add(Convert.ToString((range.Cells[j, i] as Excel.Range).Value));
-                        //Debug.WriteLine(cell_values[i-1]);
-                    }
 
-                    foreach (XmlNode node in root)
+
+
+                    List<string> cell_values = new List<string>();
+
+                    for (int j = 2; j <= rw; j++)
                     {
-                        
-                        if (node.Name == "NUM")
+                        xDoc.Load(template_file_name);
+                        root = xDoc.DocumentElement;
+                        root.SetAttribute("time", DateTime.Now.ToString("yyyy-mm-dd"));
+                        for (int i = 1; i <= cl; i++)
                         {
-                            node.InnerText = cell_values[0];
+                            cell_values.Add(Convert.ToString((range.Cells[j, i] as Excel.Range).Value));
+                            //Debug.WriteLine(cell_values[i-1]);
                         }
-                        if (node.Name == "INVNUM")
+
+                        foreach (XmlNode node in root)
                         {
-                            node.InnerText = cell_values[0];
-                        }
-                        if (node.Name == "INVDATE")
-                        {
-                            node.InnerText = DateTime.Now.ToString("yyyy-mm-dd");
-                        }
-                        if (node.Name == "PERSONSURNAME")
-                        {
-                            node.InnerText = cell_values[1];
-                        }
-                        if (node.Name == "PERSONNAME")
-                        {
-                            node.InnerText = cell_values[2];
-                        }
-                        if (node.Name == "PERSONMIDDLENAME")
-                        {
-                            node.InnerText = cell_values[3];
-                        }
-                        if (node.Name == "CITY")
-                        {
-                            node.InnerText = cell_values[7];
-                        }
-                        if (node.Name == "POSTALCODE")
-                        {
-                            node.InnerText = cell_values[6];
-                        }
-                        if (node.Name == "STREETHOUSE")
-                        {
-                            node.InnerText = cell_values[8];
-                        }
-                        if (node.Name=="GOODS")
-                        {
-                            foreach(XmlNode child in node.ChildNodes)
+
+                            if (node.Name == "NUM")
                             {
-                                if (child.Name == "DESCR")
+                                node.InnerText = cell_values[0];
+                            }
+                            if (node.Name == "INVNUM")
+                            {
+                                node.InnerText = cell_values[0];
+                            }
+                            if (node.Name == "INVDATE")
+                            {
+                                node.InnerText = DateTime.Now.ToString("yyyy-mm-dd");
+                            }
+                            if (node.Name == "PERSONSURNAME")
+                            {
+                                node.InnerText = cell_values[1];
+                            }
+                            if (node.Name == "PERSONNAME")
+                            {
+                                node.InnerText = cell_values[2];
+                            }
+                            if (node.Name == "PERSONMIDDLENAME")
+                            {
+                                node.InnerText = cell_values[3];
+                            }
+                            if (node.Name == "CITY")
+                            {
+                                node.InnerText = cell_values[7];
+                            }
+                            if (node.Name == "POSTALCODE")
+                            {
+                                node.InnerText = cell_values[6];
+                            }
+                            if (node.Name == "STREETHOUSE")
+                            {
+                                node.InnerText = cell_values[8];
+                            }
+                            if (node.Name == "GOODS")
+                            {
+                                foreach (XmlNode child in node.ChildNodes)
                                 {
-                                    child.InnerText = cell_values[9];
-                                }
-                                if (child.Name == "TNVED")
-                                {
-                                    child.InnerText = cell_values[10];
-                                }
-                                if (child.Name == "PRICE")
-                                {
-                                    child.InnerText = cell_values[11];
-                                }
-                                if (child.Name == "ORGWEIGHT")
-                                {
-                                    child.InnerText = cell_values[13];
-                                }
-                                if (child.Name == "WEIGHT")
-                                {
-                                    child.InnerText = cell_values[13];
-                                }
-                                if (child.Name == "QTY")
-                                {
-                                    child.InnerText = cell_values[14];
+                                    if (child.Name == "DESCR")
+                                    {
+                                        child.InnerText = cell_values[9];
+                                    }
+                                    if (child.Name == "TNVED")
+                                    {
+                                        child.InnerText = cell_values[10];
+                                    }
+                                    if (child.Name == "PRICE")
+                                    {
+                                        child.InnerText = cell_values[11];
+                                    }
+                                    if (child.Name == "ORGWEIGHT")
+                                    {
+                                        child.InnerText = cell_values[13];
+                                    }
+                                    if (child.Name == "WEIGHT")
+                                    {
+                                        child.InnerText = cell_values[13];
+                                    }
+                                    if (child.Name == "QTY")
+                                    {
+                                        child.InnerText = cell_values[14];
+                                    }
                                 }
                             }
-                        }                   
-                        if (node.Name == "CURRENCY")
-                        {
-                            node.InnerText = cell_values[12];
-                        }
-                        
-                        if (node.Name == "IDENTITYCARDNUMBER")
-                        {
-                            node.InnerText = cell_values[17];
-                        }
-                        if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
-                        {
-                            node.InnerText = cell_values[18];
-                        }
-                        if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
-                        {
-                            node.InnerText = cell_values[20];
-                        }
-                        if (node.Name == "IDENTITYCARDSERIES")
-                        {
-                            node.InnerText = cell_values[16];
-                        }
+                            if (node.Name == "CURRENCY")
+                            {
+                                node.InnerText = cell_values[12];
+                            }
+
+                            if (node.Name == "IDENTITYCARDNUMBER")
+                            {
+                                node.InnerText = cell_values[17];
+                            }
+                            if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
+                            {
+                                node.InnerText = cell_values[18];
+                            }
+                            if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
+                            {
+                                node.InnerText = cell_values[20];
+                            }
+                            if (node.Name == "IDENTITYCARDSERIES")
+                            {
+                                node.InnerText = cell_values[16];
+                            }
 
 
+                        }
+                        xDoc.Save(folderBrowserDialog1.SelectedPath + "\\"+ cell_values[0] + ".xml");
+                        cell_values.Clear();
+                        Debug.WriteLine("OK suka");
                     }
-                    xDoc.Save("C:/Users/Kirik/Documents/vysery/" +cell_values[0]+ ".xml");
-                    cell_values.Clear();
-                    Debug.WriteLine("OK suka");
+
+                    Debug.WriteLine("YA SDELAL POSHLI NAHUY \n eshe raz zapustite vireazhu semyu");
                 }
-                Debug.WriteLine("YA SDELAL POSHLI NAHUY \n eshe raz zapustite vireazhu semyu");
             }
         }
 
