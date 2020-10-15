@@ -17,9 +17,11 @@ namespace AltaXML
 {
     public partial class Form1 : Form
     {
-        private string name;
+        private string file_name;
         private string file;
         private string new_file_name;
+        private string template_file_name;
+        private string directory_root_name;
         
         class AltaIndPost
         {
@@ -37,26 +39,50 @@ namespace AltaXML
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            DirectoryInfo directory_root = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName);//получаем корнейвую папку
+            directory_root_name = directory_root.FullName;//получаем имя корневой папки
+            //Debug.WriteLine(directory_root );
+            foreach(FileInfo fi in directory_root.GetFiles())
             {
+                //Debug.WriteLine(fi.FullName);
+                if (fi.FullName.Contains("template.xml")) { template_file_name = fi.FullName; }
                 
-                name = openFileDialog1.FileName;
-                Debug.WriteLine(name);
-                file = File.ReadAllText(name);
-                Debug.WriteLine(file);
-                new_file_name = "C:/Users/Kirik/Downloads/1.xml" ;
-                File.Create(new_file_name).Close();
-                File.WriteAllText(new_file_name, file);
+            }
+            Debug.WriteLine(template_file_name);
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
 
+                file_name = openFileDialog1.FileName;
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(template_file_name);
+                // получим корневой элемент
+                XmlElement root = xDoc.DocumentElement;
+                Debug.WriteLine("имя рута "+root.Name);
+                foreach(XmlNode node in root)
+                {
+                    Debug.WriteLine("имя ноды "+node.Name + " значение = "+ node.InnerText);
+                    if (node.Name == "NUM")
+                    {
+                        node.InnerText = "Sosi zhopu";
+                    }
+                    
+                }
+                xDoc.Save(file_name);
 
             }
         }
 
+        private List<string> ParseExcel(string file)
+        {
+            List<string> data = new List<string>();
+            return data;
+        }
+         
+        private void InsertDataToXML(List<string> data)
+        {
+
+        }
 
     }
 
-    private void ParseExcel(File file)
-    {
-
-    }
 }
