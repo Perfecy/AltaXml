@@ -39,7 +39,7 @@ namespace AltaXML
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DirectoryInfo directory_root = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName);//получаем корнейвую папку
+            DirectoryInfo directory_root = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName);//получаем корнейвую папку
             directory_root_name = directory_root.FullName;//получаем имя корневой папки
             //Debug.WriteLine(directory_root );
             foreach(FileInfo fi in directory_root.GetFiles())
@@ -86,7 +86,7 @@ namespace AltaXML
 
                     List<string> cell_values = new List<string>();
 
-                    for (int j = 2; j <= 30; j++)
+                    for (int j = 2; j <= rw; j++)
                     {
                         xDoc.Load(template_file_name);
                         root = xDoc.DocumentElement;
@@ -193,11 +193,9 @@ namespace AltaXML
                         ProcessDisplay.AppendText(cell_values[0] + "\r\n");
                         xDoc.Save(folderBrowserDialog1.SelectedPath + "\\"+ cell_values[0] + ".xml");
                         cell_values.Clear();
-                        Debug.WriteLine("OK suka");
                         
                     }
                     ProcessDisplay.AppendText("Обработано записей: " + rw + "\r\n" + "Обработка завершена.");
-                    Debug.WriteLine("YA SDELAL POSHLI NAHUY \n eshe raz zapustite vireazhu semyu");
                 }
             }
         }

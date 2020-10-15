@@ -68,9 +68,10 @@
             // 
             // FileDisplay
             // 
+            this.FileDisplay.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.FileDisplay.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FileDisplay.Location = new System.Drawing.Point(19, 63);
-            this.FileDisplay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FileDisplay.Margin = new System.Windows.Forms.Padding(4);
             this.FileDisplay.Name = "FileDisplay";
             this.FileDisplay.ReadOnly = true;
             this.FileDisplay.Size = new System.Drawing.Size(456, 31);
@@ -78,12 +79,14 @@
             // 
             // ProcessDisplay
             // 
+            this.ProcessDisplay.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ProcessDisplay.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProcessDisplay.Location = new System.Drawing.Point(18, 117);
-            this.ProcessDisplay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProcessDisplay.Margin = new System.Windows.Forms.Padding(4);
             this.ProcessDisplay.Multiline = true;
             this.ProcessDisplay.Name = "ProcessDisplay";
             this.ProcessDisplay.ReadOnly = true;
+            this.ProcessDisplay.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ProcessDisplay.Size = new System.Drawing.Size(413, 440);
             this.ProcessDisplay.TabIndex = 7;
             // 
@@ -91,7 +94,7 @@
             // 
             this.button2.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.Location = new System.Drawing.Point(476, 514);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 43);
             this.button2.TabIndex = 8;
