@@ -19,8 +19,7 @@ namespace AltaXML
     public partial class Form1 : Form
     {
         private string file_name;
-        private string file;
-        private string new_file_name;
+
         private string template_file_name;
         private string directory_root_name;
 
@@ -30,12 +29,6 @@ namespace AltaXML
         Excel.Worksheet xlWorkSheet;
         Excel.Range range;
 
-        class AltaIndPost
-        {
-            public string NUM;
-            public string INVNUM;
-            public string INVDATE;
-        }
 
         public Form1()
         {
@@ -64,19 +57,16 @@ namespace AltaXML
                 xlWorkBook = xlApp.Workbooks.Open(file_name);
                 xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
-               // Debug.WriteLine(xlWorkSheet);
-                string str;
-                int rCnt;
-                int cCnt;
+             
                 int rw = 0;
                 int cl = 0;
 
                 range = xlWorkSheet.UsedRange;
                 rw = range.Rows.Count;
                 cl = range.Columns.Count;
-                //Debug.WriteLine(rw + " " + cl);
+
                 List<string> cell_names = new List<string>();
-              //  var cellValue = (string)(range.Cells[10, 2] as Excel.Range).Value;
+          
                 for (int i = 1; i <= cl; i++)
                 {
                     cell_names.Add((string)(range.Cells[1, i] as Excel.Range).Value);
@@ -208,16 +198,7 @@ namespace AltaXML
             }
         }
 
-        private List<string> ParseExcel(string file)
-        {
-            List<string> data = new List<string>();
-            return data;
-        }
-         
-        private void InsertDataToXML(List<string> data)
-        {
-
-        }
+   
 
         private void Form1_Load(object sender, EventArgs e)
         {
