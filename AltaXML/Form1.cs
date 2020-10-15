@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml;
 
 
 namespace AltaXML
@@ -19,7 +20,14 @@ namespace AltaXML
         private string name;
         private string file;
         private string new_file_name;
-      
+        
+        class AltaIndPost
+        {
+            public string NUM;
+            public string INVNUM;
+            public string INVDATE;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -44,9 +52,11 @@ namespace AltaXML
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
 
-        }
+    }
+
+    private void ParseExcel(File file)
+    {
+
     }
 }
