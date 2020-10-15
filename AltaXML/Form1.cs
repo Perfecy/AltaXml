@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
-
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
 namespace AltaXML
 {
@@ -22,7 +23,13 @@ namespace AltaXML
         private string new_file_name;
         private string template_file_name;
         private string directory_root_name;
-        
+
+        private XmlElement root;
+        Excel.Application xlApp;
+        Excel.Workbook xlWorkBook;
+        Excel.Worksheet xlWorkSheet;
+        Excel.Range range;
+
         class AltaIndPost
         {
             public string NUM;
@@ -45,7 +52,7 @@ namespace AltaXML
             foreach(FileInfo fi in directory_root.GetFiles())
             {
                 //Debug.WriteLine(fi.FullName);
-                if (fi.FullName.Contains("template.xml")) { template_file_name = fi.FullName; }
+                if (fi.FullName.Contains("template.xml")) { template_file_name = fi.FullName; }//получаем путь к шаблону
                 
             }
             Debug.WriteLine(template_file_name);
@@ -53,22 +60,71 @@ namespace AltaXML
             {
 
                 file_name = openFileDialog1.FileName;
+                xlApp = new Excel.Application();
+                xlWorkBook = xlApp.Workbooks.Open(file_name);
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+               // Debug.WriteLine(xlWorkSheet);
+                string str;
+                int rCnt;
+                int cCnt;
+                int rw = 0;
+                int cl = 0;
+
+                range = xlWorkSheet.UsedRange;
+                rw = range.Rows.Count;
+                cl = range.Columns.Count;
+                //Debug.WriteLine(rw + " " + cl);
+                List<string> cell_names = new List<string>();
+              //  var cellValue = (string)(range.Cells[10, 2] as Excel.Range).Value;
+                for (int i = 1; i <= cl; i++)
+                {
+                    cell_names.Add((string)(range.Cells[1, i] as Excel.Range).Value);
+                }
+
                 XmlDocument xDoc = new XmlDocument();
                 xDoc.Load(template_file_name);
                 // получим корневой элемент
-                XmlElement root = xDoc.DocumentElement;
-                Debug.WriteLine("имя рута "+root.Name);
-                foreach(XmlNode node in root)
-                {
-                    Debug.WriteLine("имя ноды "+node.Name + " значение = "+ node.InnerText);
-                    if (node.Name == "NUM")
-                    {
-                        node.InnerText = "Sosi zhopu";
-                    }
-                    
-                }
-                xDoc.Save(file_name);
+              
+             //   Debug.WriteLine("имя рута " + root.Name);
 
+
+                List<string> cell_values = new List<string>();
+
+                for (int j = 2; j <= 10; j++)
+                {
+                    xDoc.Load(template_file_name);
+                    root = xDoc.DocumentElement;
+                    root.SetAttribute("time", DateTime.Now.ToString("yyyy-mm-dd"));
+                    for (int i = 1; i <= cl; i++)
+                    {
+                        cell_values.Add(Convert.ToString((range.Cells[j, i] as Excel.Range).Value));
+                        //Debug.WriteLine(cell_values[i-1]);
+                    }
+
+                    foreach (XmlNode node in root)
+                    {
+                        
+                        if (node.Name == "NUM")
+                        {
+                            node.InnerText = cell_values[0];
+                        }
+                        if (node.Name == "INVNUM")
+                        {
+                            node.InnerText = cell_values[0];
+                        }
+                        if (node.Name == "INVDATE")
+                        {
+                            node.InnerText = DateTime.Now.ToString("yyyy-mm-dd");
+                        }
+
+                  
+                    }
+                    xDoc.Save("C:/Users/Kirik/Documents/vysery/" +cell_values[0]+ ".xml");
+                    cell_values.Clear();
+                    Debug.WriteLine("OK suka");
+                }
+                Debug.WriteLine("YA SDELAL POSHLI NAHUY \n eshe raz zapustite vireazhu semyu");
             }
         }
 
@@ -83,6 +139,10 @@ namespace AltaXML
 
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
