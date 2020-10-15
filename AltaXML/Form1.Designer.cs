@@ -32,15 +32,21 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.FileDisplay = new System.Windows.Forms.TextBox();
+            this.ProcessDisplay = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(499, 63);
+            this.button1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 32);
+            this.button1.Size = new System.Drawing.Size(71, 36);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -48,16 +54,68 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(14, 26);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 23);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Выбранный файл:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // FileDisplay
+            // 
+            this.FileDisplay.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FileDisplay.Location = new System.Drawing.Point(19, 63);
+            this.FileDisplay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FileDisplay.Name = "FileDisplay";
+            this.FileDisplay.ReadOnly = true;
+            this.FileDisplay.Size = new System.Drawing.Size(456, 31);
+            this.FileDisplay.TabIndex = 6;
+            // 
+            // ProcessDisplay
+            // 
+            this.ProcessDisplay.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcessDisplay.Location = new System.Drawing.Point(18, 117);
+            this.ProcessDisplay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProcessDisplay.Multiline = true;
+            this.ProcessDisplay.Name = "ProcessDisplay";
+            this.ProcessDisplay.ReadOnly = true;
+            this.ProcessDisplay.Size = new System.Drawing.Size(413, 440);
+            this.ProcessDisplay.TabIndex = 7;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(476, 514);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(94, 43);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Выход";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 54);
+            this.ClientSize = new System.Drawing.Size(590, 573);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.ProcessDisplay);
+            this.Controls.Add(this.FileDisplay);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.Font = new System.Drawing.Font("Calibri", 11.89565F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "Form1";
             this.Text = "AltaXML";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -66,6 +124,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox FileDisplay;
+        private System.Windows.Forms.TextBox ProcessDisplay;
+        private System.Windows.Forms.Button button2;
     }
 }
 

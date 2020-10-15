@@ -49,6 +49,7 @@ namespace AltaXML
                 
             }
             Debug.WriteLine(template_file_name);
+            //FileDisplay.Text = template_file_name;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
 
@@ -56,8 +57,9 @@ namespace AltaXML
                 xlApp = new Excel.Application();
                 xlWorkBook = xlApp.Workbooks.Open(file_name);
                 xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                FileDisplay.Text = file_name;
 
-             
+
                 int rw = 0;
                 int cl = 0;
 
@@ -84,7 +86,7 @@ namespace AltaXML
 
                     List<string> cell_values = new List<string>();
 
-                    for (int j = 2; j <= rw; j++)
+                    for (int j = 2; j <= 30; j++)
                     {
                         xDoc.Load(template_file_name);
                         root = xDoc.DocumentElement;
@@ -188,11 +190,13 @@ namespace AltaXML
 
 
                         }
+                        ProcessDisplay.AppendText(cell_values[0] + "\r\n");
                         xDoc.Save(folderBrowserDialog1.SelectedPath + "\\"+ cell_values[0] + ".xml");
                         cell_values.Clear();
                         Debug.WriteLine("OK suka");
+                        
                     }
-
+                    ProcessDisplay.AppendText("Обработано записей: " + rw + "\r\n" + "Обработка завершена.");
                     Debug.WriteLine("YA SDELAL POSHLI NAHUY \n eshe raz zapustite vireazhu semyu");
                 }
             }
@@ -203,6 +207,16 @@ namespace AltaXML
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
         }
     }
 
