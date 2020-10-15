@@ -129,7 +129,7 @@ namespace AltaXML
                         {
                             node.InnerText = cell_values[3];
                         }
-                        if (node.Name == "CONSIGNOR_ADDRESS_CITY")
+                        if (node.Name == "CITY")
                         {
                             node.InnerText = cell_values[7];
                         }
@@ -141,34 +141,41 @@ namespace AltaXML
                         {
                             node.InnerText = cell_values[8];
                         }
-                        if (node.Name == "DESCR")
+                        if (node.Name=="GOODS")
                         {
-                            node.InnerText = cell_values[9];
-                        }
-                        if (node.Name == "TNVED")
-                        {
-                            node.InnerText = cell_values[10];
-                        }
-                        if (node.Name == "PRICE")
-                        {
-                            node.InnerText = cell_values[11];
-                        }
+                            foreach(XmlNode child in node.ChildNodes)
+                            {
+                                if (child.Name == "DESCR")
+                                {
+                                    child.InnerText = cell_values[9];
+                                }
+                                if (child.Name == "TNVED")
+                                {
+                                    child.InnerText = cell_values[10];
+                                }
+                                if (child.Name == "PRICE")
+                                {
+                                    child.InnerText = cell_values[11];
+                                }
+                                if (child.Name == "ORGWEIGHT")
+                                {
+                                    child.InnerText = cell_values[13];
+                                }
+                                if (child.Name == "WEIGHT")
+                                {
+                                    child.InnerText = cell_values[13];
+                                }
+                                if (child.Name == "QTY")
+                                {
+                                    child.InnerText = cell_values[14];
+                                }
+                            }
+                        }                   
                         if (node.Name == "CURRENCY")
                         {
                             node.InnerText = cell_values[12];
                         }
-                        if (node.Name == "ORGWEIGHT")
-                        {
-                            node.InnerText = cell_values[13];
-                        }
-                        if (node.Name == "WEIGHT")
-                        {
-                            node.InnerText = cell_values[13];
-                        }
-                        if (node.Name == "QTY")
-                        {
-                            node.InnerText = cell_values[14];
-                        }
+                        
                         if (node.Name == "IDENTITYCARDNUMBER")
                         {
                             node.InnerText = cell_values[17];
