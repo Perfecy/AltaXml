@@ -22,6 +22,7 @@ namespace AltaXML
         private Excel.Worksheet xlWorkSheet;
         private Excel.Range range;
         private int counter = 0;
+        private bool full = false;
 
         public Form1()
         {
@@ -250,6 +251,11 @@ namespace AltaXML
                 cell_names.Add((string)(range.Cells[1, i] as Excel.Range).Value);
             }
 
+            if (cell_names.Contains("inn"))
+            {
+                full = true;
+            }
+
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(template_file_name);
             // получим корневой элемент
@@ -258,7 +264,7 @@ namespace AltaXML
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 List<string> cell_values = new List<string>();
-
+                
                 for (int j = 2; j <= rw; j++)
                 {
                     xDoc.Load(template_file_name);
@@ -271,14 +277,30 @@ namespace AltaXML
                         for (int i = 1; i <= cl; i++)
                         {
                             cell_values.Add(Convert.ToString((range.Cells[j, i] as Excel.Range).Value));
-                            if (i == 17)
-                            {
-                                Debug.WriteLine(cell_values[i - 1]);
-                            }
                         }
 
                         foreach (XmlNode node in root)
                         {
+                            if (full)
+                            {
+                                if (node.Name == "IDENTITYCARDSERIES")
+                                {
+                                    node.InnerText = cell_values[16];
+                                }
+                                if (node.Name == "IDENTITYCARDNUMBER")
+                                {
+                                    node.InnerText = cell_values[17];
+                                }
+                                if (node.Name == "ORGANIZATIONNAME")
+                                {
+                                    node.InnerText = cell_values[18];
+                                }
+                                if (node.Name == "IDENTITYCARDDATE")
+                                {
+                                    node.InnerText = cell_values[19];
+                                }
+                            }
+                            
                             if (node.Name == "NUM")
                             {
                                 node.InnerText = cell_values[0];
@@ -287,33 +309,53 @@ namespace AltaXML
                             {
                                 node.InnerText = cell_values[0];
                             }
-                            //if (node.Name == "INVDATE")
-                            //{
-                            //node.InnerText = DateTime.Now.ToString("yyyy-mm-dd");
-                            //}
-                            if (node.Name == "PERSONSURNAME")
+                            if (node.Name == "SENDER")
                             {
                                 node.InnerText = cell_values[1];
                             }
-                            if (node.Name == "PERSONNAME")
+                            if (node.Name == "PERSONSURNAME")
                             {
                                 node.InnerText = cell_values[2];
                             }
-                            if (node.Name == "PERSONMIDDLENAME")
+                            if (node.Name == "PERSONNAME")
                             {
                                 node.InnerText = cell_values[3];
                             }
-                            if (node.Name == "CITY")
+                            if (node.Name == "PERSONMIDDLENAME")
                             {
-                                node.InnerText = cell_values[7];
+                                node.InnerText = cell_values[4];
                             }
-                            if (node.Name == "POSTALCODE")
+                            if (node.Name == "PHONE")
+                            {
+                                node.InnerText = cell_values[5];
+                            }
+                            if (node.Name == "PHONEMOB")
+                            {
+                                node.InnerText = cell_values[5];
+                            }
+                            if (node.Name == "EMAIL")
                             {
                                 node.InnerText = cell_values[6];
                             }
-                            if (node.Name == "STREETHOUSE")
+                            if (node.Name == "CITY")
                             {
                                 node.InnerText = cell_values[8];
+                            }
+                            if (node.Name == "City")
+                            {
+                                node.InnerText = cell_values[8];
+                            }
+                            if (node.Name == "POSTALCODE")
+                            {
+                                node.InnerText = cell_values[7];
+                            }
+                            if (node.Name == "STREETHOUSE")
+                            {
+                                node.InnerText = cell_values[9];
+                            }
+                            if (node.Name == "StreetHouse")
+                            {
+                                node.InnerText = cell_values[9];
                             }
                             if (node.Name == "GOODS")
                             {
@@ -321,17 +363,29 @@ namespace AltaXML
                                 {
                                     if (child.Name == "DESCR")
                                     {
-                                        child.InnerText = cell_values[9];
+                                        child.InnerText = cell_values[10];
                                     }
                                     if (child.Name == "TNVED")
                                     {
-                                        child.InnerText = cell_values[10];
+                                        if (full)
+                                        {
+                                            child.InnerText = cell_values[21];
+                                        }
+                                        else
+                                        {
+                                            child.InnerText = cell_values[16];
+                                        }
+                                        
                                     }
                                     if (child.Name == "PRICE")
                                     {
                                         child.InnerText = cell_values[11];
                                     }
                                     if (child.Name == "ORGWEIGHT")
+                                    {
+                                        child.InnerText = cell_values[13];
+                                    }
+                                    if (child.Name == "NETTO")
                                     {
                                         child.InnerText = cell_values[13];
                                     }
@@ -343,6 +397,10 @@ namespace AltaXML
                                     {
                                         child.InnerText = cell_values[14];
                                     }
+                                    if (node.Name == "URL")
+                                    {
+                                        node.InnerText = Convert.ToString(cell_values[15]);
+                                    }
                                 }
                             }
                             if (node.Name == "CURRENCY")
@@ -350,21 +408,17 @@ namespace AltaXML
                                 node.InnerText = cell_values[12];
                             }
 
-                            if (node.Name == "IDENTITYCARDNUMBER")
-                            {
-                                node.InnerText = cell_values[17];
-                            }
                             if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
                             {
-                                node.InnerText = cell_values[18];
+                                node.InnerText = cell_values[1];
                             }
                             if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
                             {
                                 node.InnerText = cell_values[20];
                             }
-                            if (node.Name == "IDENTITYCARDSERIES")
+                            if (node.Name == "RFORGANIZATIONFEATURES_INN")
                             {
-                                node.InnerText = cell_values[16];
+                                node.InnerText = cell_values[20];
                             }
                         }
                        
@@ -461,6 +515,26 @@ namespace AltaXML
 
                         foreach (XmlNode node in root)
                         {
+                            if (full)
+                            {
+                                if (node.Name == "IDENTITYCARDSERIES")
+                                {
+                                    node.InnerText = cell_values[16];
+                                }
+                                if (node.Name == "IDENTITYCARDNUMBER")
+                                {
+                                    node.InnerText = cell_values[17];
+                                }
+                                if (node.Name == "ORGANIZATIONNAME")
+                                {
+                                    node.InnerText = cell_values[18];
+                                }
+                                if (node.Name == "IDENTITYCARDDATE")
+                                {
+                                    node.InnerText = cell_values[19];
+                                }
+                            }
+
                             if (node.Name == "NUM")
                             {
                                 node.InnerText = cell_values[0];
@@ -469,33 +543,53 @@ namespace AltaXML
                             {
                                 node.InnerText = cell_values[0];
                             }
-                            //if (node.Name == "INVDATE")
-                            //{
-                            //node.InnerText = DateTime.Now.ToString("yyyy-mm-dd");
-                            //}
-                            if (node.Name == "PERSONSURNAME")
+                            if (node.Name == "SENDER")
                             {
                                 node.InnerText = cell_values[1];
                             }
-                            if (node.Name == "PERSONNAME")
+                            if (node.Name == "PERSONSURNAME")
                             {
                                 node.InnerText = cell_values[2];
                             }
-                            if (node.Name == "PERSONMIDDLENAME")
+                            if (node.Name == "PERSONNAME")
                             {
                                 node.InnerText = cell_values[3];
                             }
-                            if (node.Name == "CITY")
+                            if (node.Name == "PERSONMIDDLENAME")
                             {
-                                node.InnerText = cell_values[7];
+                                node.InnerText = cell_values[4];
                             }
-                            if (node.Name == "POSTALCODE")
+                            if (node.Name == "PHONE")
+                            {
+                                node.InnerText = cell_values[5];
+                            }
+                            if (node.Name == "PHONEMOB")
+                            {
+                                node.InnerText = cell_values[5];
+                            }
+                            if (node.Name == "EMAIL")
                             {
                                 node.InnerText = cell_values[6];
                             }
-                            if (node.Name == "STREETHOUSE")
+                            if (node.Name == "CITY")
                             {
                                 node.InnerText = cell_values[8];
+                            }
+                            if (node.Name == "City")
+                            {
+                                node.InnerText = cell_values[8];
+                            }
+                            if (node.Name == "POSTALCODE")
+                            {
+                                node.InnerText = cell_values[7];
+                            }
+                            if (node.Name == "STREETHOUSE")
+                            {
+                                node.InnerText = cell_values[9];
+                            }
+                            if (node.Name == "StreetHouse")
+                            {
+                                node.InnerText = cell_values[9];
                             }
                             if (node.Name == "GOODS")
                             {
@@ -503,11 +597,19 @@ namespace AltaXML
                                 {
                                     if (child.Name == "DESCR")
                                     {
-                                        child.InnerText = cell_values[9];
+                                        child.InnerText = cell_values[10];
                                     }
                                     if (child.Name == "TNVED")
                                     {
-                                        child.InnerText = cell_values[10];
+                                        if (full)
+                                        {
+                                            child.InnerText = cell_values[21];
+                                        }
+                                        else
+                                        {
+                                            child.InnerText = cell_values[16];
+                                        }
+
                                     }
                                     if (child.Name == "PRICE")
                                     {
@@ -525,6 +627,10 @@ namespace AltaXML
                                     {
                                         child.InnerText = cell_values[14];
                                     }
+                                    if (node.Name == "URL")
+                                    {
+                                        node.InnerText = cell_values[15];
+                                    }
                                 }
                             }
                             if (node.Name == "CURRENCY")
@@ -532,23 +638,20 @@ namespace AltaXML
                                 node.InnerText = cell_values[12];
                             }
 
-                            if (node.Name == "IDENTITYCARDNUMBER")
-                            {
-                                node.InnerText = cell_values[17];
-                            }
                             if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
                             {
-                                node.InnerText = cell_values[18];
+                                node.InnerText = cell_values[1];
                             }
                             if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
                             {
                                 node.InnerText = cell_values[20];
                             }
-                            if (node.Name == "IDENTITYCARDSERIES")
+                            if (node.Name == "RFORGANIZATIONFEATURES_INN")
                             {
-                                node.InnerText = cell_values[16];
+                                node.InnerText = cell_values[20];
                             }
-                        }
+
+                        }   
                         
                         if (fnames.Contains(cell_values[0]))
                         {
