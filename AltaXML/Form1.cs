@@ -398,9 +398,10 @@ namespace AltaXML
                                     {
                                         child.InnerText = cell_values[14];
                                     }
-                                    if (node.Name == "URL")
+                                    if (child.Name == "URL")
                                     {
-                                        node.InnerText = Convert.ToString(cell_values[15]);
+                                        child.InnerText = cell_values[15];
+                                        
                                     }
                                 }
                             }
@@ -491,6 +492,13 @@ namespace AltaXML
             {
                 cell_names.Add((string)(range.Cells[1, i] as Excel.Range).Value);
             }
+
+            if (cell_names.Contains("inn"))
+            {
+                full = true;
+                Debug.WriteLine("KAK");
+            }
+
 
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(template_file_name);
@@ -629,9 +637,9 @@ namespace AltaXML
                                     {
                                         child.InnerText = cell_values[14];
                                     }
-                                    if (node.Name == "URL")
+                                    if (child.Name == "URL")
                                     {
-                                        node.InnerText = cell_values[15];
+                                        child.InnerText = cell_values[15];
                                     }
                                 }
                             }
@@ -658,7 +666,7 @@ namespace AltaXML
                         if (fnames.Contains(cell_values[0]))
                         {
                             
-                            xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + fnames.Count<string>(p => p == cell_values[0]) + ".xml");
+                            xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + ".xml"); 
                         }
                         else
                         {
