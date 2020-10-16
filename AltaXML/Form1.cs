@@ -13,6 +13,7 @@ using System.IO;
 using System.Xml;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Core;
 
 namespace AltaXML
 {
@@ -28,6 +29,7 @@ namespace AltaXML
         Excel.Workbook xlWorkBook;
         Excel.Worksheet xlWorkSheet;
         Excel.Range range;
+        private int counter = 0;
 
 
         public Form1()
@@ -52,11 +54,16 @@ namespace AltaXML
             //FileDisplay.Text = template_file_name;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-
                 file_name = openFileDialog1.FileName;
                 xlApp = new Excel.Application();
-                xlWorkBook = xlApp.Workbooks.Open(file_name);
-                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                
+                var workbooks = xlApp.Workbooks;
+                //xlWorkBook = xlApp.Workbooks.Open(file_name);
+                xlWorkBook = workbooks.Open(file_name);
+
+                var worksheet = xlWorkBook.Worksheets;
+                //xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                xlWorkSheet = (Excel.Worksheet)worksheet.get_Item(1);
                 FileDisplay.Text = file_name;
 
 
@@ -72,6 +79,7 @@ namespace AltaXML
                 for (int i = 1; i <= cl; i++)
                 {
                     cell_names.Add((string)(range.Cells[1, i] as Excel.Range).Value);
+                    
                 }
 
                 XmlDocument xDoc = new XmlDocument();
@@ -91,111 +99,121 @@ namespace AltaXML
                         xDoc.Load(template_file_name);
                         root = xDoc.DocumentElement;
                         root.SetAttribute("time", DateTime.Now.ToString("yyyy-mm-dd"));
-                        for (int i = 1; i <= cl; i++)
-                        {
-                            cell_values.Add(Convert.ToString((range.Cells[j, i] as Excel.Range).Value));
-                            //Debug.WriteLine(cell_values[i-1]);
-                        }
 
-                        foreach (XmlNode node in root)
+                        if ((string)(range.Cells[j, 1] as Excel.Range).Value != null)
                         {
+                            counter += 1;
+                            for (int i = 1; i <= cl; i++)
+                            {
+                                cell_values.Add(Convert.ToString((range.Cells[j, i] as Excel.Range).Value));
+                            }
 
-                            if (node.Name == "NUM")
+                            foreach (XmlNode node in root)
                             {
-                                node.InnerText = cell_values[0];
-                            }
-                            if (node.Name == "INVNUM")
-                            {
-                                node.InnerText = cell_values[0];
-                            }
-                            if (node.Name == "INVDATE")
-                            {
-                                node.InnerText = DateTime.Now.ToString("yyyy-mm-dd");
-                            }
-                            if (node.Name == "PERSONSURNAME")
-                            {
-                                node.InnerText = cell_values[1];
-                            }
-                            if (node.Name == "PERSONNAME")
-                            {
-                                node.InnerText = cell_values[2];
-                            }
-                            if (node.Name == "PERSONMIDDLENAME")
-                            {
-                                node.InnerText = cell_values[3];
-                            }
-                            if (node.Name == "CITY")
-                            {
-                                node.InnerText = cell_values[7];
-                            }
-                            if (node.Name == "POSTALCODE")
-                            {
-                                node.InnerText = cell_values[6];
-                            }
-                            if (node.Name == "STREETHOUSE")
-                            {
-                                node.InnerText = cell_values[8];
-                            }
-                            if (node.Name == "GOODS")
-                            {
-                                foreach (XmlNode child in node.ChildNodes)
+
+                                if (node.Name == "NUM")
                                 {
-                                    if (child.Name == "DESCR")
+                                    node.InnerText = cell_values[0];
+                                }
+                                if (node.Name == "INVNUM")
+                                {
+                                    node.InnerText = cell_values[0];
+                                }
+                                //if (node.Name == "INVDATE")
+                                //{
+                                    //node.InnerText = DateTime.Now.ToString("yyyy-mm-dd");
+                                //}
+                                if (node.Name == "PERSONSURNAME")
+                                {
+                                    node.InnerText = cell_values[1];
+                                }
+                                if (node.Name == "PERSONNAME")
+                                {
+                                    node.InnerText = cell_values[2];
+                                }
+                                if (node.Name == "PERSONMIDDLENAME")
+                                {
+                                    node.InnerText = cell_values[3];
+                                }
+                                if (node.Name == "CITY")
+                                {
+                                    node.InnerText = cell_values[7];
+                                }
+                                if (node.Name == "POSTALCODE")
+                                {
+                                    node.InnerText = cell_values[6];
+                                }
+                                if (node.Name == "STREETHOUSE")
+                                {
+                                    node.InnerText = cell_values[8];
+                                }
+                                if (node.Name == "GOODS")
+                                {
+                                    foreach (XmlNode child in node.ChildNodes)
                                     {
-                                        child.InnerText = cell_values[9];
-                                    }
-                                    if (child.Name == "TNVED")
-                                    {
-                                        child.InnerText = cell_values[10];
-                                    }
-                                    if (child.Name == "PRICE")
-                                    {
-                                        child.InnerText = cell_values[11];
-                                    }
-                                    if (child.Name == "ORGWEIGHT")
-                                    {
-                                        child.InnerText = cell_values[13];
-                                    }
-                                    if (child.Name == "WEIGHT")
-                                    {
-                                        child.InnerText = cell_values[13];
-                                    }
-                                    if (child.Name == "QTY")
-                                    {
-                                        child.InnerText = cell_values[14];
+                                        if (child.Name == "DESCR")
+                                        {
+                                            child.InnerText = cell_values[9];
+                                        }
+                                        if (child.Name == "TNVED")
+                                        {
+                                            child.InnerText = cell_values[10];
+                                        }
+                                        if (child.Name == "PRICE")
+                                        {
+                                            child.InnerText = cell_values[11];
+                                        }
+                                        if (child.Name == "ORGWEIGHT")
+                                        {
+                                            child.InnerText = cell_values[13];
+                                        }
+                                        if (child.Name == "WEIGHT")
+                                        {
+                                            child.InnerText = Convert.ToString(float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
+                                        }
+                                        if (child.Name == "QTY")
+                                        {
+                                            child.InnerText = cell_values[14];
+                                        }
                                     }
                                 }
-                            }
-                            if (node.Name == "CURRENCY")
-                            {
-                                node.InnerText = cell_values[12];
-                            }
+                                if (node.Name == "CURRENCY")
+                                {
+                                    node.InnerText = cell_values[12];
+                                }
 
-                            if (node.Name == "IDENTITYCARDNUMBER")
-                            {
-                                node.InnerText = cell_values[17];
-                            }
-                            if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
-                            {
-                                node.InnerText = cell_values[18];
-                            }
-                            if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
-                            {
-                                node.InnerText = cell_values[20];
-                            }
-                            if (node.Name == "IDENTITYCARDSERIES")
-                            {
-                                node.InnerText = cell_values[16];
-                            }
+                                if (node.Name == "IDENTITYCARDNUMBER")
+                                {
+                                    node.InnerText = cell_values[17];
+                                }
+                                if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
+                                {
+                                    node.InnerText = cell_values[18];
+                                }
+                                if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
+                                {
+                                    node.InnerText = cell_values[20];
+                                }
+                                if (node.Name == "IDENTITYCARDSERIES")
+                                {
+                                    node.InnerText = cell_values[16];
+                                }
 
 
+                            }
+                            ProcessDisplay.AppendText(cell_values[0] + "\r\n");
+                            xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + ".xml");
+                            cell_values.Clear();
                         }
-                        ProcessDisplay.AppendText(cell_values[0] + "\r\n");
-                        xDoc.Save(folderBrowserDialog1.SelectedPath + "\\"+ cell_values[0] + ".xml");
-                        cell_values.Clear();
+                        
                         
                     }
-                    ProcessDisplay.AppendText("Обработано записей: " + rw + "\r\n" + "Обработка завершена.");
+                    ProcessDisplay.AppendText("Обработано записей: " + counter + "\r\n" + "Обработка завершена.");
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(workbooks);
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
+                    xlWorkBook.Close(0);
+                    //xlApp.Quit();
                 }
             }
         }
