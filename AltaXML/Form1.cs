@@ -254,6 +254,7 @@ namespace AltaXML
             if (cell_names.Contains("inn"))
             {
                 full = true;
+                Debug.WriteLine("KAK");
             }
 
             XmlDocument xDoc = new XmlDocument();
@@ -445,6 +446,7 @@ namespace AltaXML
                     }
                 }
                 ProcessDisplay.AppendText("Обработано записей: " + counter + "\r\n" + "Обработка завершена.");
+                full = false;
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbooks);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
@@ -677,6 +679,7 @@ namespace AltaXML
                     }
                 }
                 ProcessDisplay.AppendText("Обработано записей: " + counter + "\r\n" + "Обработка завершена.");
+                full = false;
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbooks);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
