@@ -50,7 +50,17 @@ namespace AltaXML
                     MessageBox.Show("Ошибка: выбранный файл не является файлом Excel.", "Формат файла");
                 }
 
-                
+                DialogResult dialogResult = MessageBox.Show("Загрузить файл с дополнительными данными?", "Дополнительные данные", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //do something
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    //do something else
+                }
+
             }
         }
 
