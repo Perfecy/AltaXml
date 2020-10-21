@@ -87,10 +87,10 @@ namespace AltaXML
                     stWorkSheet = (Excel.Worksheet)stworksheet.get_Item(1);
                     stRange = stWorkSheet.UsedRange;
 
-                    for (int i = 1; i <= stRange.Columns.Count; i++)
-                    {
-                        missed_values.Add(Convert.ToString((stRange.Cells[2, i] as Excel.Range).Value));
-                    }
+                    //for (int i = 1; i <= stRange.Columns.Count; i++)
+                    //{
+                    //    missed_values.Add(Convert.ToString((stRange.Cells[2, i] as Excel.Range).Value));
+                    //}
 
                 }
                 
@@ -175,7 +175,10 @@ namespace AltaXML
                             {
                                 cell_values.Add((Convert.ToString((range.Cells[j, i] as Excel.Range).Value))); //.Replace(" ", String.Empty));
                             }
-
+                            for (int i = 2; i <= stRange.Columns.Count; i++)
+                            {
+                                missed_values.Add(Convert.ToString((stRange.Cells[j, i] as Excel.Range).Value));
+                            }
                             foreach (XmlNode node in root)
                             {
                                 if (full)
@@ -422,7 +425,7 @@ namespace AltaXML
                             }
                             fnames.Add(cell_values[0]);
                             cell_values.Clear();
-
+                            missed_values.Clear();
                         }
                     }
                     ProcessDisplay.AppendText("Обработано записей: " + counter + "\r\n" + "Обработка завершена.\n");
@@ -474,10 +477,10 @@ namespace AltaXML
                     stWorkSheet = (Excel.Worksheet)stworksheet.get_Item(1);
                     stRange = stWorkSheet.UsedRange;
 
-                    for (int i = 1; i <= stRange.Columns.Count; i++)
-                    {
-                        missed_values.Add(Convert.ToString((stRange.Cells[2, i] as Excel.Range).Value));
-                    }
+                    //for (int i = 1; i <= stRange.Columns.Count; i++)
+                    //{
+                    //    missed_values.Add(Convert.ToString((stRange.Cells[2, i] as Excel.Range).Value));
+                    //}
 
                 }
 
@@ -553,7 +556,10 @@ namespace AltaXML
                                 {
                                     cell_values.Add((Convert.ToString((range.Cells[j, i] as Excel.Range).Value)));  //.Replace(" ", String.Empty));
                                 }
-
+                                for (int i = 2; i <= stRange.Columns.Count; i++)
+                                {
+                                    missed_values.Add(Convert.ToString((stRange.Cells[j, i] as Excel.Range).Value));
+                                }
                                 foreach (XmlNode node in root)
                                 {
                                     
@@ -640,7 +646,7 @@ namespace AltaXML
                                             }
                                             if (child.Name == "TNVED")
                                             {
-                                                child.InnerText = cell_names[10];
+                                                child.InnerText = cell_values[10];
                                             }
                                             if (child.Name == "PRICE")
                                             {
@@ -800,7 +806,7 @@ namespace AltaXML
                                 }
                                 fnames.Add(cell_values[0]);
                                 cell_values.Clear();
-
+                                missed_values.Clear();
                             }
                         }
                         catch (RuntimeBinderException ex)
