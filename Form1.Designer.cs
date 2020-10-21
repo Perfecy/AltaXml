@@ -38,7 +38,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -64,7 +63,7 @@
             this.label1.Location = new System.Drawing.Point(14, 26);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(137, 19);
+            this.label1.Size = new System.Drawing.Size(161, 23);
             this.label1.TabIndex = 5;
             this.label1.Text = "Выбранный файл:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -77,7 +76,7 @@
             this.FileDisplay.Margin = new System.Windows.Forms.Padding(4);
             this.FileDisplay.Name = "FileDisplay";
             this.FileDisplay.ReadOnly = true;
-            this.FileDisplay.Size = new System.Drawing.Size(522, 27);
+            this.FileDisplay.Size = new System.Drawing.Size(522, 31);
             this.FileDisplay.TabIndex = 6;
             // 
             // ProcessDisplay
@@ -129,13 +128,9 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // openFileDialog2
-            // 
-            this.openFileDialog2.FileName = "openFileDialog2";
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 573);
             this.Controls.Add(this.button3);
@@ -166,7 +161,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 

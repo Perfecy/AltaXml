@@ -1,0 +1,22 @@
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.exe.config
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.exe
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.pdb
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csprojAssemblyReference.cache
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.Form1.resources
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.Properties.Resources.resources
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.GenerateResource.cache
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.CoreCompileInputs.cache
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.exe
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.pdb
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.ResolveComReference.cache
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\bin\Debug\AltaXML.exe.config
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\bin\Debug\AltaXML.exe
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\bin\Debug\AltaXML.pdb
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.csprojAssemblyReference.cache
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.ResolveComReference.cache
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.Form1.resources
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.Properties.Resources.resources
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.GenerateResource.cache
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.CoreCompileInputs.cache
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.exe
+C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.pdb
