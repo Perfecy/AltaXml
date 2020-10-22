@@ -590,7 +590,7 @@ namespace AltaXML
                                     }
                                     if (node.Name == "SENDER")
                                     {
-                                        node.InnerText = cell_values[1];
+                                        node.InnerText = cell_values[18];
                                     }
                                     if (node.Name == "PERSONSURNAME")
                                     {
@@ -658,7 +658,14 @@ namespace AltaXML
                                             }
                                             if (child.Name == "WEIGHT")
                                             {
-                                                child.InnerText = Convert.ToString(float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
+                                                //float firststep = float.Parse(cell_values[13]) * float.Parse(cell_values[14]);
+                                                //string secondstep = Convert.ToString(Math.Round(firststep, 3));
+
+                                                //if (secondstep.Length - (secondstep.IndexOf(",") + 1) < 3)
+                                                //{
+                                                //    secondstep += "0";
+                                                //}
+                                                child.InnerText = string.Format("{0:N3}", float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
                                             }
                                             if (child.Name == "QTY")
                                             {
@@ -781,7 +788,7 @@ namespace AltaXML
                                         }
                                         if (node.Name == "ALLWEIGHT")
                                         {
-                                            node.InnerText = Convert.ToString(float.Parse(cell_values[13]) * float.Parse(cell_values[14])).Replace('.', ',');
+                                            node.InnerText  = string.Format("{0:N3}", float.Parse(cell_values[13]) * float.Parse(cell_values[14])).Replace('.', ',');
                                         }
                                     }
                                 }
