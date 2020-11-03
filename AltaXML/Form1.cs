@@ -167,265 +167,276 @@ namespace AltaXML
                         root = xDoc.DocumentElement;
                         root.SetAttribute("time", DateTime.Now.ToString("yyyy-mm-dd"));
 
-
-                        if (Convert.ToString((range.Cells[j, 1] as Excel.Range).Value) != null)
+                        try
                         {
-                            counter += 1;
-                            for (int i = 1; i <= cl; i++)
+                            if (Convert.ToString((range.Cells[j, 1] as Excel.Range).Value) != null)
                             {
-                                cell_values.Add((Convert.ToString((range.Cells[j, i] as Excel.Range).Value))); //.Replace(" ", String.Empty));
-                            }
-                            for (int i = 2; i <= stRange.Columns.Count; i++)
-                            {
-                                missed_values.Add(Convert.ToString((stRange.Cells[j, i] as Excel.Range).Value));
-                            }
-                            foreach (XmlNode node in root)
-                            {
-                                if (full)
+                                counter += 1;
+                                for (int i = 1; i <= cl; i++)
                                 {
-                                    if (node.Name == "IDENTITYCARDSERIES")
-                                    {
-                                        node.InnerText = cell_values[16];
-                                    }
-                                    if (node.Name == "IDENTITYCARDNUMBER")
-                                    {
-                                        node.InnerText = cell_values[17];
-                                    }
-                                    if (node.Name == "ORGANIZATIONNAME")
-                                    {
-                                        node.InnerText = cell_values[18];
-                                    }
-                                    if (node.Name == "IDENTITYCARDDATE")
-                                    {
-                                        node.InnerText = cell_values[19];
-                                    }
+                                    cell_values.Add((Convert.ToString((range.Cells[j, i] as Excel.Range).Value))); //.Replace(" ", String.Empty));
                                 }
-
-                                if (node.Name == "NUM")
-                                {
-                                    node.InnerText = cell_values[0];
-                                }
-                                if (node.Name == "INVNUM")
-                                {
-                                    node.InnerText = cell_values[0];
-                                }
-                                if (node.Name == "SENDER")
-                                {
-                                    node.InnerText = cell_values[1];
-                                }
-                                if (node.Name == "PERSONSURNAME")
-                                {
-                                    node.InnerText = cell_values[2];
-                                }
-                                if (node.Name == "PERSONNAME")
-                                {
-                                    node.InnerText = cell_values[3];
-                                }
-                                if (node.Name == "PERSONMIDDLENAME")
-                                {
-                                    node.InnerText = cell_values[4];
-                                }
-                                if (node.Name == "PHONE")
-                                {
-                                    node.InnerText = cell_values[5];
-                                }
-                                if (node.Name == "PHONEMOB")
-                                {
-                                    node.InnerText = cell_values[5];
-                                }
-                                if (node.Name == "EMAIL")
-                                {
-                                    node.InnerText = cell_values[6];
-                                }
-                                if (node.Name == "CITY")
-                                {
-                                    node.InnerText = cell_values[8];
-                                }
-                                if (node.Name == "City")
-                                {
-                                    node.InnerText = cell_values[8];
-                                }
-                                if (node.Name == "POSTALCODE")
-                                {
-                                    node.InnerText = cell_values[7];
-                                }
-                                if (node.Name == "STREETHOUSE")
-                                {
-                                    node.InnerText = cell_values[9];
-                                }
-                                if (node.Name == "StreetHouse")
-                                {
-                                    node.InnerText = cell_values[9];
-                                }
-                                if (node.Name == "GOODS")
-                                {
-                                    foreach (XmlNode child in node.ChildNodes)
-                                    {
-                                        if (child.Name == "DESCR")
-                                        {
-                                            child.InnerText = cell_values[10];
-                                        }
-                                        if (child.Name == "TNVED")
-                                        {
-                                            if (full)
-                                            {
-                                                child.InnerText = cell_values[21];
-                                            }
-                                            else
-                                            {
-                                                child.InnerText = cell_values[16];
-                                            }
-
-                                        }
-                                        if (child.Name == "PRICE")
-                                        {
-                                            child.InnerText = string.Format("{0:N2}", cell_values[11]);
-                                        }
-                                        if (child.Name == "ORGWEIGHT")
-                                        {
-                                            child.InnerText = cell_values[13];
-                                        }
-                                        if (child.Name == "NETTO")
-                                        {
-                                            child.InnerText = cell_values[13];
-                                        }
-                                        if (child.Name == "WEIGHT")
-                                        {
-                                            child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
-                                        }
-                                        if (child.Name == "QTY")
-                                        {
-                                            child.InnerText = cell_values[14];
-                                        }
-                                        if (child.Name == "URL")
-                                        {
-                                            child.InnerText = cell_values[15];
-
-                                        }
-                                        if (child.Name == "COST")
-                                        {
-                                            child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[11]) * float.Parse(cell_values[14]));
-                                        }
-                                        if (additive_data)
-                                        {
-                                            if (child.Name == "MEASUREUNITQUALIFIERCODE")
-                                            {
-                                                child.InnerText = missed_values[15];
-                                            }
-                                            if (child.Name == "MEASUREUNITQUALIFIERNAME")
-                                            {
-                                                child.InnerText = missed_values[16];
-                                            }
-                                        }
-                                        
-                                    }
-                                }
-                                if (node.Name == "CURRENCY")
-                                {
-                                    node.InnerText = cell_values[12];
-                                }
-
-                                if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
-                                {
-                                    node.InnerText = cell_values[1];
-                                }
-                                if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
-                                {
-                                    node.InnerText = cell_values[20];
-                                }
-                                if (node.Name == "RFORGANIZATIONFEATURES_INN")
-                                {
-                                    node.InnerText = cell_values[20];
-                                }
-                                //-----------------------------
-
                                 if (additive_data)
                                 {
-                                    if (node.Name == "AVIANUM")
+                                    for (int i = 2; i <= stRange.Columns.Count; i++)
                                     {
-                                        node.InnerText = missed_values[0];
+                                        missed_values.Add(Convert.ToString((stRange.Cells[j, i] as Excel.Range).Value));
                                     }
-                                    if (node.Name == "IDENTITYCARDNAME")
+                                }
+                                
+                                foreach (XmlNode node in root)
+                                {
+                                    if (full)
                                     {
-                                        node.InnerText = missed_values[1];
+                                        if (node.Name == "IDENTITYCARDSERIES")
+                                        {
+                                            node.InnerText = cell_values[16];
+                                        }
+                                        if (node.Name == "IDENTITYCARDNUMBER")
+                                        {
+                                            node.InnerText = cell_values[17];
+                                        }
+                                        if (node.Name == "ORGANIZATIONNAME")
+                                        {
+                                            node.InnerText = cell_values[18];
+                                        }
+                                        if (node.Name == "IDENTITYCARDDATE")
+                                        {
+                                            node.InnerText = cell_values[19];
+                                        }
                                     }
-                                    if (node.Name == "IDENTITYCARDCODE")
+
+                                    if (node.Name == "NUM")
                                     {
-                                        node.InnerText = missed_values[2];
+                                        node.InnerText = cell_values[0];
                                     }
-                                    if (node.Name == "CONSIGNEE_ADDRESS_COUNTRYCODE")
+                                    if (node.Name == "INVNUM")
                                     {
-                                        node.InnerText = missed_values[3];
+                                        node.InnerText = cell_values[0];
                                     }
-                                    if (node.Name == "CONSIGNEE_ADDRESS_COUNTRYNAME")
+                                    if (node.Name == "SENDER")
                                     {
-                                        node.InnerText = missed_values[4];
+                                        node.InnerText = cell_values[1];
                                     }
-                                    if (node.Name == "ORGCOUNTRY")
+                                    if (node.Name == "PERSONSURNAME")
                                     {
-                                        node.InnerText = missed_values[5];
+                                        node.InnerText = cell_values[2];
                                     }
-                                    if (node.Name == "DELIVERYTERMS_TRADINGCOUNTRYCODE")
+                                    if (node.Name == "PERSONNAME")
                                     {
-                                        node.InnerText = missed_values[6];
+                                        node.InnerText = cell_values[3];
                                     }
-                                    if (node.Name == "DELIVERYTERMS_DISPATCHCOUNTRYCODE")
+                                    if (node.Name == "PERSONMIDDLENAME")
                                     {
-                                        node.InnerText = missed_values[7];
+                                        node.InnerText = cell_values[4];
                                     }
-                                    if (node.Name == "DELIVERYTERMS_DELIVERYTERMSSTRINGCODE")
+                                    if (node.Name == "PHONE")
                                     {
-                                        node.InnerText = missed_values[8];
+                                        node.InnerText = cell_values[5];
                                     }
-                                    if (node.Name == "DEPARTUREPOINT_IATACODE")
+                                    if (node.Name == "PHONEMOB")
                                     {
-                                        node.InnerText = missed_values[9];
+                                        node.InnerText = cell_values[5];
                                     }
-                                    if (node.Name == "DELIVERYPOINT_IATACODE")
+                                    if (node.Name == "EMAIL")
                                     {
-                                        node.InnerText = missed_values[10];
+                                        node.InnerText = cell_values[6];
                                     }
-                                    if (node.Name == "ARRIVEDATE")
+                                    if (node.Name == "CITY")
                                     {
-                                        node.InnerText = missed_values[11];
+                                        node.InnerText = cell_values[8];
                                     }
-                                    if (node.Name == "ALLCOST")
+                                    if (node.Name == "City")
                                     {
-                                        node.InnerText = string.Format("{0:N2}", missed_values[12]);
+                                        node.InnerText = cell_values[8];
                                     }
-                                    if (node.Name == "ALLWEIGHT")
+                                    if (node.Name == "POSTALCODE")
                                     {
-                                        node.InnerText = string.Format("{0:N3}", missed_values[13]);
+                                        node.InnerText = cell_values[7];
                                     }
-                                    if (node.Name == "PLACES")
+                                    if (node.Name == "STREETHOUSE")
                                     {
-                                        node.InnerText = missed_values[14];
+                                        node.InnerText = cell_values[9];
                                     }
-                                    
+                                    if (node.Name == "StreetHouse")
+                                    {
+                                        node.InnerText = cell_values[9];
+                                    }
+                                    if (node.Name == "GOODS")
+                                    {
+                                        foreach (XmlNode child in node.ChildNodes)
+                                        {
+                                            if (child.Name == "DESCR")
+                                            {
+                                                child.InnerText = cell_values[10];
+                                            }
+                                            if (child.Name == "TNVED")
+                                            {
+                                                if (full)
+                                                {
+                                                    child.InnerText = cell_values[21];
+                                                }
+                                                else
+                                                {
+                                                    child.InnerText = cell_values[16];
+                                                }
+
+                                            }
+                                            if (child.Name == "PRICE")
+                                            {
+                                                child.InnerText = string.Format("{0:N2}", cell_values[11]);
+                                            }
+                                            if (child.Name == "ORGWEIGHT")
+                                            {
+                                                child.InnerText = cell_values[13];
+                                            }
+                                            if (child.Name == "NETTO")
+                                            {
+                                                child.InnerText = cell_values[13];
+                                            }
+                                            if (child.Name == "WEIGHT")
+                                            {
+                                                child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
+                                            }
+                                            if (child.Name == "QTY")
+                                            {
+                                                child.InnerText = cell_values[14];
+                                            }
+                                            if (child.Name == "URL")
+                                            {
+                                                child.InnerText = cell_values[15];
+
+                                            }
+                                            if (child.Name == "COST")
+                                            {
+                                                child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[11]) * float.Parse(cell_values[14]));
+                                            }
+                                            if (additive_data)
+                                            {
+                                                if (child.Name == "MEASUREUNITQUALIFIERCODE")
+                                                {
+                                                    child.InnerText = missed_values[15];
+                                                }
+                                                if (child.Name == "MEASUREUNITQUALIFIERNAME")
+                                                {
+                                                    child.InnerText = missed_values[16];
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    if (node.Name == "CURRENCY")
+                                    {
+                                        node.InnerText = cell_values[12];
+                                    }
+
+                                    if (node.Name == "CONSIGNOR_IDENTITYCARD_ORGANIZATIONNAME")
+                                    {
+                                        node.InnerText = cell_values[1];
+                                    }
+                                    if (node.Name == "CONSIGNOR_RFORGANIZATIONFEATURES_INN")
+                                    {
+                                        node.InnerText = cell_values[20];
+                                    }
+                                    if (node.Name == "RFORGANIZATIONFEATURES_INN")
+                                    {
+                                        node.InnerText = cell_values[20];
+                                    }
+                                    //-----------------------------
+
+                                    if (additive_data)
+                                    {
+                                        if (node.Name == "AVIANUM")
+                                        {
+                                            node.InnerText = missed_values[0];
+                                        }
+                                        if (node.Name == "IDENTITYCARDNAME")
+                                        {
+                                            node.InnerText = missed_values[1];
+                                        }
+                                        if (node.Name == "IDENTITYCARDCODE")
+                                        {
+                                            node.InnerText = missed_values[2];
+                                        }
+                                        if (node.Name == "CONSIGNEE_ADDRESS_COUNTRYCODE")
+                                        {
+                                            node.InnerText = missed_values[3];
+                                        }
+                                        if (node.Name == "CONSIGNEE_ADDRESS_COUNTRYNAME")
+                                        {
+                                            node.InnerText = missed_values[4];
+                                        }
+                                        if (node.Name == "ORGCOUNTRY")
+                                        {
+                                            node.InnerText = missed_values[5];
+                                        }
+                                        if (node.Name == "DELIVERYTERMS_TRADINGCOUNTRYCODE")
+                                        {
+                                            node.InnerText = missed_values[6];
+                                        }
+                                        if (node.Name == "DELIVERYTERMS_DISPATCHCOUNTRYCODE")
+                                        {
+                                            node.InnerText = missed_values[7];
+                                        }
+                                        if (node.Name == "DELIVERYTERMS_DELIVERYTERMSSTRINGCODE")
+                                        {
+                                            node.InnerText = missed_values[8];
+                                        }
+                                        if (node.Name == "DEPARTUREPOINT_IATACODE")
+                                        {
+                                            node.InnerText = missed_values[9];
+                                        }
+                                        if (node.Name == "DELIVERYPOINT_IATACODE")
+                                        {
+                                            node.InnerText = missed_values[10];
+                                        }
+                                        if (node.Name == "ARRIVEDATE")
+                                        {
+                                            node.InnerText = missed_values[11];
+                                        }
+                                        if (node.Name == "ALLCOST")
+                                        {
+                                            node.InnerText = string.Format("{0:N2}", missed_values[12]);
+                                        }
+                                        if (node.Name == "ALLWEIGHT")
+                                        {
+                                            node.InnerText = string.Format("{0:N3}", missed_values[13]);
+                                        }
+                                        if (node.Name == "PLACES")
+                                        {
+                                            node.InnerText = missed_values[14];
+                                        }
+
+                                    }
+
                                 }
 
-                            }
+                                if (fnames.Contains(cell_values[0]))
+                                {
 
-                            if (fnames.Contains(cell_values[0]))
-                            {
-
-                                xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + ".xml");
+                                    xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + ".xml");
+                                }
+                                else
+                                {
+                                    xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + ".xml");
+                                }
+                                if (fnames.Contains(cell_values[0]))
+                                {
+                                    ProcessDisplay.AppendText(cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + "\r\n");
+                                }
+                                else
+                                {
+                                    ProcessDisplay.AppendText(cell_values[0] + "\r\n");
+                                }
+                                fnames.Add(cell_values[0]);
+                                cell_values.Clear();
+                                missed_values.Clear();
                             }
-                            else
-                            {
-                                xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + ".xml");
-                            }
-                            if (fnames.Contains(cell_values[0]))
-                            {
-                                ProcessDisplay.AppendText(cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + "\r\n");
-                            }
-                            else
-                            {
-                                ProcessDisplay.AppendText(cell_values[0] + "\r\n");
-                            }
-                            fnames.Add(cell_values[0]);
-                            cell_values.Clear();
-                            missed_values.Clear();
+                        }
+                        catch (RuntimeBinderException ex)
+                        {
+                            ProcessDisplay.AppendText("Ошибка чтения строки \r\n");
+                            error_counter += 1;
                         }
                     }
                     ProcessDisplay.AppendText("Обработано записей: " + counter + "\r\n" + "Обработка завершена.\n");
