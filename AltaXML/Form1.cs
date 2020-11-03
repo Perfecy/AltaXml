@@ -279,7 +279,7 @@ namespace AltaXML
                                         }
                                         if (child.Name == "PRICE")
                                         {
-                                            child.InnerText = cell_values[11];
+                                            child.InnerText = string.Format("{0:N2}", cell_values[11]);
                                         }
                                         if (child.Name == "ORGWEIGHT")
                                         {
@@ -291,7 +291,7 @@ namespace AltaXML
                                         }
                                         if (child.Name == "WEIGHT")
                                         {
-                                            child.InnerText = Convert.ToString(float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
+                                            child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
                                         }
                                         if (child.Name == "QTY")
                                         {
@@ -304,7 +304,7 @@ namespace AltaXML
                                         }
                                         if (child.Name == "COST")
                                         {
-                                            child.InnerText = Convert.ToString(float.Parse(cell_values[11]) * float.Parse(cell_values[14]));
+                                            child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[11]) * float.Parse(cell_values[14]));
                                         }
                                         if (additive_data)
                                         {
@@ -391,11 +391,11 @@ namespace AltaXML
                                     }
                                     if (node.Name == "ALLCOST")
                                     {
-                                        node.InnerText = missed_values[12];
+                                        node.InnerText = string.Format("{0:N2}", missed_values[12]);
                                     }
                                     if (node.Name == "ALLWEIGHT")
                                     {
-                                        node.InnerText = missed_values[13];
+                                        node.InnerText = string.Format("{0:N3}", missed_values[13]);
                                     }
                                     if (node.Name == "PLACES")
                                     {
@@ -650,7 +650,7 @@ namespace AltaXML
                                             }
                                             if (child.Name == "PRICE")
                                             {
-                                                child.InnerText = cell_values[11];
+                                                child.InnerText = string.Format("{0:N2}", cell_values[11]);
                                             }
                                             if (child.Name == "ORGWEIGHT")
                                             {
@@ -665,7 +665,7 @@ namespace AltaXML
                                                 //{
                                                 //    secondstep += "0";
                                                 //}
-                                                child.InnerText = string.Format("{0:N3}", float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
+                                                child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[13]) * float.Parse(cell_values[14]));
                                             }
                                             if (child.Name == "QTY")
                                             {
@@ -677,7 +677,7 @@ namespace AltaXML
                                             }
                                             if (child.Name == "COST")
                                             {
-                                                child.InnerText = Convert.ToString(float.Parse(cell_values[11]) * float.Parse(cell_values[14]));
+                                                child.InnerText = string.Format("{0:N2}", float.Parse(cell_values[11]) * float.Parse(cell_values[14]));
                                             }
                                         }
                                     }
@@ -784,7 +784,7 @@ namespace AltaXML
                                         }
                                         if (node.Name == "ALLCOST")
                                         {
-                                            node.InnerText = Convert.ToString(float.Parse(cell_values[11]) * float.Parse(cell_values[14])).Replace('.', ',');
+                                            node.InnerText = string.Format("{0:N2}", float.Parse(cell_values[11]) * float.Parse(cell_values[14])).Replace('.', ',');
                                         }
                                         if (node.Name == "ALLWEIGHT")
                                         {
