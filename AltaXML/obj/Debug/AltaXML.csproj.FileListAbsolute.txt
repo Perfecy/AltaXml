@@ -20,3 +20,14 @@ C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\Alta
 C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.CoreCompileInputs.cache
 C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.exe
 C:\Users\Nasdaq\Desktop\Game Design\Final Project\AltaXml\AltaXML\obj\Debug\AltaXML.pdb
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.exe.config
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.exe
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.pdb
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csprojAssemblyReference.cache
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.ResolveComReference.cache
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.Form1.resources
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.Properties.Resources.resources
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.GenerateResource.cache
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.CoreCompileInputs.cache
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.exe
+C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.pdb
