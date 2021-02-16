@@ -165,7 +165,7 @@ namespace AltaXML
                     {
                         xDoc.Load(template_file_name);
                         root = xDoc.DocumentElement;
-                        root.SetAttribute("time", DateTime.Now.ToString("yyyy-mm-dd"));
+                        root.SetAttribute("time", DateTime.Now.ToString("yyyy-MM-dd"));
 
                         try
                         {
@@ -444,7 +444,14 @@ namespace AltaXML
                                     {
                                         if (cell_names.Contains(node.Name))
                                         {
-                                            node.InnerText = cell_values[cell_names.IndexOf(node.Name)];
+                                            if (node.Name.Contains("DATE"))
+                                            {
+                                                node.InnerText = DateTime.Parse(cell_values[cell_names.IndexOf(node.Name)]).ToString("yyyy-MM-dd");
+                                            }
+                                            else
+                                            {
+                                                node.InnerText = cell_values[cell_names.IndexOf(node.Name)];
+                                            }
                                         }
                                     }
                                     Debug.WriteLine(node.Name + "-   -" + cell_names.IndexOf(node.Name) + "  ");
@@ -596,7 +603,7 @@ namespace AltaXML
                     {
                         xDoc.Load(template_file_name);
                         root = xDoc.DocumentElement;
-                        root.SetAttribute("time", DateTime.Now.ToString("yyyy-mm-dd"));
+                        root.SetAttribute("time", DateTime.Now.ToString("yyyy-MM-dd"));
 
                         try
                         {
@@ -628,7 +635,7 @@ namespace AltaXML
                                         }
                                         if (node.Name == "IDENTITYCARDDATE")
                                         {
-                                            node.InnerText = cell_values[19];
+                                            node.InnerText = DateTime.Parse(cell_values[19]).ToString("yyyy-MM-dd");
                                         }
                                         
                                     if (node.Name == "NUM")
@@ -755,7 +762,7 @@ namespace AltaXML
                                     {
                                         if (node.Name == "INVDATE")
                                         {
-                                            node.InnerText = missed_values[0];
+                                            node.InnerText = DateTime.Parse(cell_values[0]).ToString("yyyy-MM-dd");
                                         }
                                         if (node.Name == "AVIANUM")
                                         {
@@ -763,7 +770,7 @@ namespace AltaXML
                                         }
                                         if (node.Name == "AVIADATE")
                                         {
-                                            node.InnerText = missed_values[2];
+                                            node.InnerText = DateTime.Parse(cell_values[2]).ToString("yyyy-MM-dd");
                                         }
                                         if (node.Name == "TYPE")
                                         {
