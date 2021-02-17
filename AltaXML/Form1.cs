@@ -195,7 +195,7 @@ namespace AltaXML
                                 }
                                 if (additive_data)
                                 {
-                                    for (int i = 2; i <= stRange.Columns.Count; i++)
+                                    for (int i = 1; i <= stRange.Columns.Count; i++)
                                     {
                                         missed_values.Add(Convert.ToString((stRange.Cells[j, i] as Excel.Range).Value));
                                     }
