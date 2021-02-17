@@ -69,37 +69,48 @@ namespace AltaXML
 
         private void button3_Click(object sender, EventArgs e)//import
         {
-            //DialogResult dialogResult = MessageBox.Show("Загрузить файл с дополнительными данными?", "Дополнительные данные", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Загрузить файл с дополнительными данными?", "Дополнительные данные", MessageBoxButtons.YesNo);
 
-            //List<string> missed_values = new List<string>();
-            //Excel.Workbooks stworkbooks = null;
-            //Excel.Sheets stworksheet = null;
+            List<string> missed_values = new List<string>();
+            Excel.Workbooks stworkbooks = null;
+            Excel.Sheets stworksheet = null;
+            List<string> missed_names = new List<string>();
 
-            //if (dialogResult == DialogResult.Yes)
-            //{
-            //    if(openFileDialog2.ShowDialog() == DialogResult.OK)
-            //    {
-            //        additive_data = true;
-            //        stApp = new Excel.Application();
-            //        stworkbooks = stApp.Workbooks;
-            //        stWorkBook = stworkbooks.Open(openFileDialog2.FileName);
-            //        stworksheet = stWorkBook.Worksheets;
-            //        stWorkSheet = (Excel.Worksheet)stworksheet.get_Item(1);
-            //        stRange = stWorkSheet.UsedRange;
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (openFileDialog2.ShowDialog() == DialogResult.OK)
+                {
+                    additive_data = true;
+                    stApp = new Excel.Application();
+                    stworkbooks = stApp.Workbooks;
+                    stWorkBook = stworkbooks.Open(openFileDialog2.FileName);
+                    stworksheet = stWorkBook.Worksheets;
+                    stWorkSheet = (Excel.Worksheet)stworksheet.get_Item(1);
+                    stRange = stWorkSheet.UsedRange;
 
-            //        //for (int i = 1; i <= stRange.Columns.Count; i++)
-            //        //{
-            //        //    missed_values.Add(Convert.ToString((stRange.Cells[2, i] as Excel.Range).Value));
-            //        //}
+                    for (int i = 1; i <= stRange.Columns.Count; i++)
+                    {
+                        missed_values.Add(Convert.ToString((stRange.Cells[2, i] as Excel.Range).Value));
+                    }
+                    
 
-            //    }
+
+
+                    for (int i = 1; i <= stRange.Columns.Count; i++)
+                    {
+                        missed_names.Add((string)(stRange.Cells[1, i] as Excel.Range).Value);
+                    }
+
                 
 
-            //}
-            //else if (dialogResult == DialogResult.No)
-            //{
-            //    additive_data = false;
-            //}
+                }
+
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                additive_data = false;
+            }
 
 
             DirectoryInfo directory_root = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName);//получаем корнейвую папку
@@ -157,6 +168,12 @@ namespace AltaXML
                   
 
                 //   Debug.WriteLine("имя рута " + root.Name);
+                //обработка и формирование xml
+                //основной цикл программы
+                //
+                //
+                //
+
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
                     List<string> cell_values = new List<string>();
@@ -176,14 +193,14 @@ namespace AltaXML
                                 {
                                     cell_values.Add((Convert.ToString((range.Cells[j, i] as Excel.Range).Value))); //.Replace(" ", String.Empty));
                                 }
-                                //if (additive_data)
-                                //{
-                                //    for (int i = 2; i <= stRange.Columns.Count; i++)
-                                //    {
-                                //        missed_values.Add(Convert.ToString((stRange.Cells[j, i] as Excel.Range).Value));
-                                //    }
-                                //}
-                                
+                                if (additive_data)
+                                {
+                                    for (int i = 2; i <= stRange.Columns.Count; i++)
+                                    {
+                                        missed_values.Add(Convert.ToString((stRange.Cells[j, i] as Excel.Range).Value));
+                                    }
+                                }
+
                                 //foreach (XmlNode node in root)
                                 //{
                                 //    if (full)
@@ -410,16 +427,8 @@ namespace AltaXML
                                 //    }
 
                                 //}
-                                foreach(string str in cell_values)
-                                {
-                                    Debug.Write(str + "--           --");
-                                }
-                                Debug.WriteLine("");
-                                foreach (string str in cell_names)
-                                {
-                                    Debug.Write(str + "--           --");
-                                }
-                                Debug.WriteLine("");
+                                
+                              
                                 foreach (XmlNode node in root)
                                 {
 
@@ -427,7 +436,27 @@ namespace AltaXML
                                     {
                                         foreach (XmlNode child in node.ChildNodes)
                                         {
-                                            if (cell_names.Contains(child.Name))
+                                            if (child.Name == "DESCR")
+                                            {
+                                                child.InnerText = cell_values[cell_names.IndexOf("DESCRIPTION")];
+
+                                            }
+                                            else if (child.Name == "WEIGHT")
+                                            {
+                                                child.InnerText = cell_values[cell_names.IndexOf("GROSS WEIGHT")];
+
+                                            }
+                                            else if (child.Name == "QTY")
+                                            {
+                                                child.InnerText = cell_values[cell_names.IndexOf("QUANTITY")];
+
+                                            }
+                                            else if (child.Name == "URL")
+                                            {
+                                                child.InnerText = cell_values[cell_names.IndexOf("GOODSURL")];
+
+                                            }
+                                            else if (cell_names.Contains(child.Name))
                                             {
                                                 child.InnerText = cell_values[cell_names.IndexOf(child.Name)];
                                             }
@@ -440,13 +469,61 @@ namespace AltaXML
                                         node.InnerText = cell_values[cell_names.IndexOf("PARCELNO")];
 
                                     }
+                                    else if (node.Name == "PHONEMOB")
+                                    {
+                                        node.InnerText = cell_values[cell_names.IndexOf("PHONE")];
+
+                                    }
+                                    else if (node.Name == "IDENTITYCARDNUMBER")
+                                    {
+                                        node.InnerText = cell_values[cell_names.IndexOf("idocNumber")];
+
+                                    }
+                                    else if (node.Name == "IDENTITYCARDSERIES")
+                                    {
+                                        node.InnerText = cell_values[cell_names.IndexOf("idocSeries")];
+
+                                    }
+                                    else if (node.Name == "ORGANIZATIONNAME")
+                                    {
+                                        node.InnerText = cell_values[cell_names.IndexOf("idocOrg")];
+
+                                    }
+                                    else if (node.Name == "IDENTITYCARDDATE")
+                                    {
+                                        try
+                                        {
+                                            node.InnerText = DateTime.Parse(cell_values[cell_names.IndexOf("idocDate")]).ToString("yyyy-MM-dd");
+                                        }catch (FormatException formex)
+                                        {
+                                            ProcessDisplay.AppendText(cell_values[0] + " - Ошибка данных." + "\r\n");
+                                            continue;
+                                        }
+                                    }
+                                    else if (node.Name == "STREETHOUSE")
+                                    {
+                                        node.InnerText = cell_values[cell_names.IndexOf("STREET")];
+
+                                    }
+                                    else if (node.Name == "RFORGANIZATIONFEATURES_INN")
+                                    {
+                                        node.InnerText = cell_values[cell_names.IndexOf("STREET")];
+
+                                    }
                                     else
                                     {
                                         if (cell_names.Contains(node.Name))
                                         {
                                             if (node.Name.Contains("DATE"))
                                             {
-                                                node.InnerText = DateTime.Parse(cell_values[cell_names.IndexOf(node.Name)]).ToString("yyyy-MM-dd");
+                                                try
+                                                {
+                                                    node.InnerText = DateTime.Parse(cell_values[cell_names.IndexOf(node.Name)]).ToString("yyyy-MM-dd");
+                                                }catch (FormatException formex)
+                                                {
+                                                    ProcessDisplay.AppendText(cell_values[0] + " - Ошибка данных." + "\r\n");
+                                                    continue;
+                                                }
                                             }
                                             else
                                             {
@@ -454,10 +531,65 @@ namespace AltaXML
                                             }
                                         }
                                     }
-                                    Debug.WriteLine(node.Name + "-   -" + cell_names.IndexOf(node.Name) + "  ");
+
                                 }
+                                
+                                //загрузка полей для файла выбора
+                               
+                                    if (additive_data)
+                                    {
+                                        foreach (XmlNode node in root)
+                                        {
 
+                                            if (node.Name == "GOODS")
+                                            {
+                                                foreach (XmlNode child in node.ChildNodes)
+                                                {
+                                                    if (missed_names.Contains(child.Name))
+                                                    {
+                                                        child.InnerText = missed_values[missed_names.IndexOf(child.Name)];
+                                                    }
 
+                                                }
+
+                                            }
+                                            else if (node.Name == "NUM")
+                                            {
+                                                node.InnerText = missed_values[missed_names.IndexOf("PARCELNO")];
+
+                                            }
+                                            else
+                                            {
+                                                if (missed_names.Contains(node.Name))
+                                                {
+                                                
+                                                    if (node.Name.Contains("DATE"))
+                                                    {
+                                                    try
+                                                    {
+                                                        node.InnerText = DateTime.Parse(missed_values[missed_names.IndexOf(node.Name)]).ToString("yyyy-MM-dd");
+                                                    }catch (FormatException formex)
+                                                    {
+                                                        ProcessDisplay.AppendText(cell_values[0] + " - Ошибка данных." + "\r\n");
+                                                        continue;
+                                                    }
+                                                }
+                                                    else
+                                                    {
+                                                        node.InnerText = missed_values[missed_names.IndexOf(node.Name)];
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    }
+                             
+                                //сохрание
+
+                                //
+                                //
+                                //
+                                //
                                 if (fnames.Contains(cell_values[0]))
                                 {
 
