@@ -623,7 +623,7 @@ namespace AltaXML
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(workbooks);
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
                     xlWorkBook.Close(0);
-                    xlApp.Quit();
+              
                     if (additive_data)
                     {
                         System.Runtime.InteropServices.Marshal.ReleaseComObject(stworksheet);
@@ -633,7 +633,7 @@ namespace AltaXML
                     }
 
 
-                    stApp.Quit();
+                    
                 }
             }
             catch (COMException comex)
