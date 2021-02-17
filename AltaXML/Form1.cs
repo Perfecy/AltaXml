@@ -555,8 +555,7 @@ namespace AltaXML
                                             }
                                             else if (node.Name == "NUM")
                                             {
-                                                node.InnerText = missed_values[missed_names.IndexOf("PARCELNO")];
-
+                                               
                                             }
                                             else
                                             {
@@ -609,7 +608,7 @@ namespace AltaXML
                                 }
                                 fnames.Add(cell_values[0]);
                                 cell_values.Clear();
-                                //missed_values.Clear();
+                                missed_values.Clear();
                             }
                         }
                         catch (RuntimeBinderException ex)
@@ -624,17 +623,17 @@ namespace AltaXML
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(workbooks);
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp);
                     xlWorkBook.Close(0);
-                    //xlApp.Quit();
-                    //if (additive_data)
-                    //{
-                    //    System.Runtime.InteropServices.Marshal.ReleaseComObject(stworksheet);
-                    //    System.Runtime.InteropServices.Marshal.ReleaseComObject(stworkbooks);
-                    //    System.Runtime.InteropServices.Marshal.ReleaseComObject(stApp);
-                    //    stWorkBook.Close(0);
-                    //}
-                    
-                    
-                    // stApp.Quit();
+                    xlApp.Quit();
+                    if (additive_data)
+                    {
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(stworksheet);
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(stworkbooks);
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(stApp);
+                        stWorkBook.Close(0);
+                    }
+
+
+                    stApp.Quit();
                 }
             }
             catch (COMException comex)
