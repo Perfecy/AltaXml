@@ -507,7 +507,7 @@ namespace AltaXML
                                     }
                                     else if (node.Name == "RFORGANIZATIONFEATURES_INN")
                                     {
-                                        node.InnerText = cell_values[cell_names.IndexOf("STREET")];
+                                        node.InnerText = cell_values[cell_names.IndexOf("inn")];
 
                                     }
                                     else
