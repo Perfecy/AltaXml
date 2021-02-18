@@ -630,8 +630,9 @@ namespace AltaXML
                         System.Runtime.InteropServices.Marshal.ReleaseComObject(stworkbooks);
                         System.Runtime.InteropServices.Marshal.ReleaseComObject(stApp);
                         stWorkBook.Close(0);
+                        additive_data = false;
                     }
-
+                    counter = 0;
 
                     
                 }
