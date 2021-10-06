@@ -536,6 +536,10 @@ namespace AltaXML
                                         {
                                             node.InnerText = cell_values[cell_names.IndexOf(node.Name)];
                                         }
+                                        else
+                                        {
+                                            node.InnerText = "";
+                                        }
                                     }
                                 
                                 }
@@ -543,11 +547,12 @@ namespace AltaXML
 
                                 if (fnames.Contains(cell_values[0]))
                                 {
-
+                                    xDoc.PreserveWhitespace = true;
                                     xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + ".xml");
                                 }
                                 else
                                 {
+                                    xDoc.PreserveWhitespace = true;
                                     xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + ".xml");
                                 }
 
