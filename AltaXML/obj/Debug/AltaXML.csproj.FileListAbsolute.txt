@@ -1,7 +1,6 @@
 C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.exe.config
 C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.exe
 C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\bin\Debug\AltaXML.pdb
-C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csprojAssemblyReference.cache
 C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.Form1.resources
 C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.Properties.Resources.resources
 C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.GenerateResource.cache
