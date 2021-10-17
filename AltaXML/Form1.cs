@@ -447,9 +447,7 @@ namespace AltaXML
             //        //}
 
             //    }
-
-
-            
+            List<XmlDocument> doc_list = new List<XmlDocument>();
 
             foreach (FileInfo fi in directory_root.GetFiles())
             {
@@ -543,27 +541,28 @@ namespace AltaXML
                                     }
                                 
                                 }
-                                    
+                                
+                                doc_list.Add((XmlDocument) xDoc.Clone());
+                         
+                                //if (fnames.Contains(cell_values[0]))
+                                //{
+                                //    //xDoc.PreserveWhitespace = true;
+                                //    xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + ".xml");
+                                //}
+                                //else
+                                //{
+                                //    //xDoc.PreserveWhitespace = true;
+                                //    xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + ".xml");
+                                //}
 
-                                if (fnames.Contains(cell_values[0]))
-                                {
-                                    xDoc.PreserveWhitespace = true;
-                                    xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + ".xml");
-                                }
-                                else
-                                {
-                                    xDoc.PreserveWhitespace = true;
-                                    xDoc.Save(folderBrowserDialog1.SelectedPath + "\\" + cell_values[0] + ".xml");
-                                }
-
-                                if (fnames.Contains(cell_values[0]))
-                                {
-                                    ProcessDisplay.AppendText(cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + "\r\n");
-                                }
-                                else
-                                {
-                                    ProcessDisplay.AppendText(cell_values[0] + "\r\n");
-                                }
+                                //if (fnames.Contains(cell_values[0]))
+                                //{
+                                //    ProcessDisplay.AppendText(cell_values[0] + "-" + fnames.Count<string>(p => p == cell_values[0]) + "\r\n");
+                                //}
+                                //else
+                                //{
+                                //    ProcessDisplay.AppendText(cell_values[0] + "\r\n");
+                                //}
                                 fnames.Add(cell_values[0]);
                                 cell_values.Clear();
                                 
@@ -575,6 +574,49 @@ namespace AltaXML
                             error_counter += 1;
                         }
                     }
+                    List<string> num_list = new List<string>();
+                    // все гудс их файлов с одинаковым номером добавлять в файл номер 1
+                    // и в другой лист
+                    for (int i = 0; i < doc_list.Count(); i++)
+                    {
+                        num_list.Add((string) doc_list[i].GetElementsByTagName("NUM")[0].InnerText);
+                    }
+                    num_list = num_list.Distinct().ToList();
+                    List<XmlDocument> numdoc = new List<XmlDocument>();
+
+
+
+                    foreach(string num in num_list){
+                        foreach (XmlDocument doc in doc_list)
+                        {
+                            if (doc.GetElementsByTagName("NUM")[0].InnerText == num)
+                            {
+                                numdoc.Add(doc);
+                            }
+                        }
+                        XmlDocument main_doc;
+                        main_doc = numdoc[0];
+                        for (int i = 1; i < numdoc.Count; i++)
+                        {
+                            XmlNode tempNode = main_doc.ImportNode(numdoc[i].GetElementsByTagName("GOODS")[0],true);
+                            main_doc.DocumentElement.AppendChild(tempNode);
+                            //main_doc.DocumentElement.GetElementsByTagName("GOODS")[-1].InnerXml = tempNode.InnerXml;
+                            //XmlNode temp = numdoc[i].GetElementsByTagName("GOODS")[0];
+                            //main_doc.CreateElement("GOODS");
+                            //main_doc.GetElementsByTagName("GOODS")[-1].InnerXml. =;
+                            //main_doc.AppendChild((XmlNode)temp.Clone());
+                        }
+                        main_doc.Save(folderBrowserDialog1.SelectedPath + "\\" + main_doc.GetElementsByTagName("NUM")[0].InnerText + ".xml");
+                        ProcessDisplay.AppendText(main_doc.GetElementsByTagName("NUM")[0].InnerText + "\r\n");
+                    numdoc.Clear();
+                    }
+                                        
+                    //foreach(XmlDocument doc in doc_list)
+                    //{
+                    //    doc.Save(folderBrowserDialog1.SelectedPath + "\\" + doc.GetElementsByTagName("NUM")[0].InnerText + ".xml");
+                    //    ProcessDisplay.AppendText(doc.GetElementsByTagName("NUM")[0].InnerText + "\r\n");
+                    //}
+
                     ProcessDisplay.AppendText("Обработано записей: " + counter + "\r\n" + "Ошибок чтения: " + error_counter + "\r\n" + "Обработка завершена. \r\n");
                     counter = 0;
                     error_counter = 0;

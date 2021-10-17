@@ -30,3 +30,4 @@ C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.Generat
 C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csproj.CoreCompileInputs.cache
 C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.exe
 C:\Users\lukun\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.pdb
+C:\Users\Kirik\Documents\GitHub\AltaXml\AltaXML\obj\Debug\AltaXML.csprojAssemblyReference.cache
